@@ -46,7 +46,7 @@
 #include <string.h>
 #include <stdarg.h>
 
-#ifdef _MSC_VER
+#ifdef __MINGW32__
 #ifndef snprintf
 #define snprintf _snprintf
 #endif
@@ -99,9 +99,19 @@ evt_tag_long(const char *tag, long value)
 EVTTAG *
 evt_tag_errno(const char *tag, int err)
 {
-  char buf[128];
-  
+  char buf[512];
+#ifndef __MINGW32__ 
   snprintf(buf, sizeof(buf), "%s (%d)", strerror(err), err);
+#else
+  FormatMessage(
+        FORMAT_MESSAGE_FROM_SYSTEM |
+        FORMAT_MESSAGE_IGNORE_INSERTS,
+        NULL,
+        err,
+        MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+        (LPTSTR) &buf,
+        512, NULL );
+#endif 
   return evt_tag_str(tag, buf);  
 }
 

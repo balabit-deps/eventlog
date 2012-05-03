@@ -45,10 +45,9 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-#ifdef _MSC_VER
+#ifdef __MINGW32__
 #include <malloc.h>
 #endif
-#include <alloca.h>
 
 /* event string handling */
 

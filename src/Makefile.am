@@ -1,7 +1,7 @@
 
 lib_LTLIBRARIES = libevtlog.la
 
-libevtlog_la_SOURCES = evtrec.c evtfmt.c evtout.c evtstr.c evtctx.c evttags.c evtsyslog.c
+libevtlog_la_SOURCES = evtrec.c evtfmt.c evtstr.c evtctx.c evttags.c
 	
 noinst_HEADERS = evt_internals.h 
 

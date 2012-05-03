@@ -40,7 +40,7 @@
 #ifndef __EVTLOG_H_INCLUDED
 #define __EVTLOG_H_INCLUDED
 
-#ifndef _MSC_VER
+#ifndef __MINGW32__
 # include <syslog.h>
 #endif
 #include <stdarg.h>
