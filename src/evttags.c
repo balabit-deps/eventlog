@@ -46,7 +46,7 @@
 #include <string.h>
 #include <stdarg.h>
 
-#ifdef __MINGW32__
+#ifdef __WIN32__
 #ifndef snprintf
 #define snprintf _snprintf
 #endif
@@ -100,7 +100,7 @@ EVTTAG *
 evt_tag_errno(const char *tag, int err)
 {
   char buf[512];
-#ifndef __MINGW32__ 
+#ifndef __WIN32__
   snprintf(buf, sizeof(buf), "%s (%d)", strerror(err), err);
 #else
   FormatMessage(

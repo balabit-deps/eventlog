@@ -45,8 +45,10 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-#ifdef __MINGW32__
+#ifdef __WIN32__
 #include <malloc.h>
+#else
+#include <alloca.h>
 #endif
 
 /* event string handling */

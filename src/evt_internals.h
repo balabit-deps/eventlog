@@ -46,7 +46,7 @@
 #include <config.h>
 #endif
 
-#ifdef _MSC_VER
+#ifdef __WIN32__
 #include <windows.h>
 #endif
 

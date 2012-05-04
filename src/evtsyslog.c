@@ -82,6 +82,7 @@ evt_syslog(int pri, const char *format, ...)
 }
 
 #if ENABLE_DLSYM_WRAPPER
+#warning dysym wrapper init
 
 #include <dlfcn.h>
 
@@ -123,6 +124,7 @@ evt_syslog_wrapper_init(void)
 }
 
 #else
+#warning normal wrapper init
 
 void
 evt_syslog_wrapper_init(void)

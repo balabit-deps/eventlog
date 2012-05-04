@@ -55,6 +55,11 @@ dnl Checks for header files.
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 
+AC_MSG_CHECKING([for Win32])
+case "$host" in
+  *-*-mingw*) native_win32=yes ;;
+  *) native_win32=no;;
+esac
 dnl Checks for library functions.
 AC_CHECK_FUNCS(strdup strerror)
 
@@ -63,7 +68,10 @@ if test "x$ac_compiler_gnu" = "xyes"; then
 	if test "x$enable_debug" = "xyes"; then
 		CFLAGS="-Wall -g"
 	fi
-	CPPFLAGS="-D_GNU_SOURCE -D_MSC_VER"
+	CPPFLAGS="-D_GNU_SOURCE"
+	if test "x$native_win32" = "xyes"; then
+		CPPFLAGS="$CPPFLAGS -D__WIN32__"
+	fi
 fi
 
 if test x$enable_dlsym_wrapper = xyes; then
@@ -71,13 +79,18 @@ if test x$enable_dlsym_wrapper = xyes; then
 	AC_DEFINE(ENABLE_DLSYM_WRAPPER, 1, [enable DLSYM wrapper])
 fi
 
-LDFLAGS="${LD_FLAGS} -no-undefined -share -lkernel32"
+if test "x$native_win32" = "xyes"; then
+	LDFLAGS="${LD_FLAGS} -lkernel32"
+	MODULE_LDFLAGS="-no-undefined -shared"
+fi
 
 AC_SUBST(CURRDATE)
 AC_SUBST(RELEASE_TAG)
 AC_SUBST(SNAPSHOT_VERSION)
 AC_SUBST(SOURCE_REVISION)
+AC_SUBST(MODULE_LDFLAGS)
 
+AM_CONDITIONAL(IS_WIN32, [test "$native_win32" = "yes"])
 
 AC_OUTPUT(Makefile 
         src/Makefile 
