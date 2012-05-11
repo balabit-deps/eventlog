@@ -56,10 +56,11 @@ dnl Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 
 AC_MSG_CHECKING([for Win32])
-case "$host" in
+case "$build" in
   *-*-mingw*) native_win32=yes ;;
   *) native_win32=no;;
 esac
+
 dnl Checks for library functions.
 AC_CHECK_FUNCS(strdup strerror)
 
