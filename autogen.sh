@@ -12,3 +12,4 @@ autoheader
 autoconf
 automake --add-missing --foreign --copy --force-missing
 find -name libtool -o -name ltmain.sh | xargs sed -i -e "s,'file format pe-i386.*\?','file format \(pei\*-i386\(\.\*architecture: i386\)\?|pe-arm-wince|pe-x86-64\)',"
+sed -i -e "s, cmd //c, sh -c," ltmain.sh

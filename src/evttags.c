@@ -100,9 +100,15 @@ EVTTAG *
 evt_tag_errno(const char *tag, int err)
 {
   char buf[512];
-#ifndef __WIN32__
   snprintf(buf, sizeof(buf), "%s (%d)", strerror(err), err);
-#else
+  return evt_tag_str(tag, buf);
+}
+
+#ifdef __WIN32__
+EVTTAG *
+evt_tag_errno_win(const char *tag, int err)
+{
+  char buf[512];
   FormatMessage(
         FORMAT_MESSAGE_FROM_SYSTEM |
         FORMAT_MESSAGE_IGNORE_INSERTS,
@@ -110,10 +116,10 @@ evt_tag_errno(const char *tag, int err)
         err,
         MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
         (LPTSTR) &buf,
-        512, NULL );
-#endif 
-  return evt_tag_str(tag, buf);  
+        sizeof(buf), NULL );
+  return evt_tag_str(tag, buf);
 }
+#endif
 
 EVTTAG *
 evt_tag_printf(const char *tag, const char *format, ...)
