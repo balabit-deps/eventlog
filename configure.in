@@ -51,6 +51,7 @@ AM_PROG_LIBTOOL
 dnl Checks for libraries.
 
 dnl Checks for header files.
+AC_FUNC_ALLOCA
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
@@ -84,6 +85,8 @@ if test "x$native_win32" = "xyes"; then
 	LDFLAGS="${LD_FLAGS} -lkernel32"
 	MODULE_LDFLAGS="-no-undefined -shared"
 fi
+
+
 
 AC_SUBST(CURRDATE)
 AC_SUBST(RELEASE_TAG)

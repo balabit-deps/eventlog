@@ -45,10 +45,22 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-#ifdef __WIN32__
-#include <malloc.h>
+
+#ifdef HAVE_ALLOCA_H
+# include <alloca.h>
+#elif defined __GNUC__
+# define alloca __builtin_alloca
+#elif defined _AIX
+# define alloca __alloca
+#elif defined __WIN32__
+# include <malloc.h>
+# define alloca _alloca
 #else
-#include <alloca.h>
+# include <stddef.h>
+# ifdef  __cplusplus
+extern "C"
+# endif
+void *alloca (size_t);
 #endif
 
 /* event string handling */
