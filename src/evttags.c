@@ -106,7 +106,7 @@ evt_tag_errno(const char *tag, int err)
 
 #ifdef __WIN32__
 EVTTAG *
-evt_tag_errno_win(const char *tag, int err)
+evt_tag_win32_error(const char *tag, int err)
 {
   char buf[512];
   FormatMessage(
