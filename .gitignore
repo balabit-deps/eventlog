@@ -12,3 +12,5 @@ ltmain.sh
 missing
 mkinstalldirs
 *.m4
+b
+smake/*.pyc
