@@ -12,6 +12,6 @@ ltmain.sh
 missing
 mkinstalldirs
 *.m4
-sbuild/build
-sbuild/*.pyc
+sbuild/*
+!sbuild/config.yml
 sbuild.py
